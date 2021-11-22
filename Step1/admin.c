@@ -213,15 +213,15 @@ void SaiSieVehiculeAG(int Reference, struct VehiculeAG *UnRecord) {
     fgets(UnRecord->Marque, sizeof UnRecord->Marque, stdin);
     printf("Saisie Modele :");
     fgets(UnRecord->Modele, sizeof UnRecord->Modele, stdin);
-    printf("Saisie Transmition :");
-    fgets(UnRecord->Transmition, sizeof UnRecord->Transmition, stdin);
+    printf("Saisie Transmission :");
+    fgets(UnRecord->Transmission, sizeof UnRecord->Transmission, stdin);
     printf("Saisie Quantite :");
     fgets(Tampon, sizeof Tampon, stdin);
     UnRecord->Quantite = atoi(Tampon);
 
     DelNewLine(UnRecord->Marque);
     DelNewLine(UnRecord->Modele);
-    DelNewLine(UnRecord->Transmition);
+    DelNewLine(UnRecord->Transmission);
     AfficheEnteteVehiculeAG();
     AfficheVehiculeAG(UnRecord);
     printf("-----------------------\n");
@@ -248,7 +248,7 @@ void AfficheVehiculeAG(struct VehiculeAG *UnRecord) {
     MonPrintf(Tampon, 30, strlen(Tampon));
     sprintf(Tampon, "%s", UnRecord->Modele);
     MonPrintf(Tampon, 30, strlen(Tampon));
-    sprintf(Tampon, "%s", UnRecord->Transmition);
+    sprintf(Tampon, "%s", UnRecord->Transmission);
     MonPrintf(Tampon, 30, strlen(Tampon));
     sprintf(Tampon, "%d", UnRecord->Quantite);
     MonPrintf(Tampon, 6, strlen(Tampon));
@@ -263,7 +263,7 @@ void AfficheEnteteVehiculeAG() {
     MonPrintf(Tampon, 30, strlen(Tampon));
     sprintf(Tampon, "%s", "Modele");
     MonPrintf(Tampon, 30, strlen(Tampon));
-    sprintf(Tampon, "%s", "Transmition");
+    sprintf(Tampon, "%s", "Transmission");
     MonPrintf(Tampon, 30, strlen(Tampon));
     sprintf(Tampon, "%s", "Quantite");
     MonPrintf(Tampon, 6, strlen(Tampon));

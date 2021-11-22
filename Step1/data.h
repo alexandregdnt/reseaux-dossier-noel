@@ -5,7 +5,7 @@ struct VehiculeAG {
     int  Reference;
     char Marque[30];
     char Modele[30];
-    char Transmition[10];
+    char Transmission[10];
     int  Quantite;
     char Date[10];
 };
