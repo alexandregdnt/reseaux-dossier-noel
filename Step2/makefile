@@ -24,6 +24,8 @@ udplib.o: Libraries/udplib/udplib.h Libraries/udplib/udplib.c
 	echo "Compilation de udplib.o"
 	${COMP} -c Libraries/udplib/udplib.c
 
+clearall: clear cleardata clearlogs
+
 clear:
 	echo "Suppression des fichiers compilés"
 	rm -rf *.o admin cli ser

@@ -1,9 +1,5 @@
 /*--------------------------------------
-  Herman Vanstapel
-  
-  ex02\ser.c 
-  
-  Un serveur recevant une structure 
+    Alexandre Grodent
 ----------------------------------------*/
 
 #include <stdio.h>

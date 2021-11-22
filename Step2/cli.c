@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
     if (Desc == -1)
         die("CreateSockets:");
     else
-        fprintf(stderr, "CreateSockets %d\n", Desc);
+        printf("CreateSockets %d\n", Desc);
 
     sos.sin_family = AF_INET;
     sos.sin_addr.s_addr = IpServer;
