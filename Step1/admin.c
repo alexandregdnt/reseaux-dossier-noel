@@ -59,7 +59,7 @@ int main() {
         printf("6) A propos           \n");
         printf("7) exit               \n");
         printf("----------------------\n");
-        printf(">>");
+        printf(">> ");
         Choix = GetchE();
         printf("\n");
         switch (Choix) {
@@ -75,7 +75,7 @@ int main() {
                     SaiSieVehiculeAG(Nombre + 1, &UnRecord);
                     CreationAjoutVehiculeAG("VehiculesAG", &UnRecord);
                     printf("Encoder un autre (Y/N) ?)");
-                    printf(">>");
+                    printf(">> ");
                     Redo = GetchE();
                     printf("\n");
                 }
