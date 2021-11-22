@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
     IpServer = inet_addr(argv[3]);
     PortServer = atoi(argv[4]);
 
-    // Desc = CreateSockets(&psoo,&psos,,atoi(argv[2]),argv[3],atoi(argv[4])) ;
+    // Desc = CreateSockets(&psoo,&psos,,atoi(argv[2]),argv[3],atoi(argv[4]));
     Desc = creer_socket(SOCK_DGRAM, &IpSocket, PortSocket, &sthis);
 
     if (Desc == -1)

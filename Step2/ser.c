@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
     /* Récupération IP & port   */
     IpSocket = inet_addr(argv[1]);
     PortSocket = atoi(argv[2]);
-    // Desc = CreateSockets(&psoo,&psos,,atoi(argv[2]),argv[3],atoi(argv[4])) ;
+    // Desc = CreateSockets(&psoo,&psos,,atoi(argv[2]),argv[3],atoi(argv[4]));
     Desc = creer_socket(SOCK_DGRAM, &IpSocket, PortSocket, &sthis);
 
     if (Desc == -1)

@@ -19,17 +19,17 @@
 #include <string.h>
 
 struct ip4 {
-	u_char b1 ;
-        u_char b2 ;
-	u_char b3 ;
-	u_char b4 ;
+	u_char b1;
+        u_char b2;
+	u_char b3;
+	u_char b4;
 	};
 
-int	Ipv4ToInt(char *s,int *ip) ;
-void	Ipv4ToS(int ip, char *s) ; 
-void    afficher_adresse( struct ip4 *adresse ) ;
-int     creer_socket(int,u_long *ai, u_short port,struct sockaddr_in *pin) ;
-int SendDatagram(int desc,void *message,int tm, struct sockaddr_in *psos ) ;
-int ReceiveDatagram(int desc, void *message,int tm, struct sockaddr_in *psor ) ;
-int     generer_masque(int NbrBits ) ;
+int	Ipv4ToInt(char *s,int *ip);
+void	Ipv4ToS(int ip, char *s);
+void    afficher_adresse( struct ip4 *adresse );
+int     creer_socket(int,u_long *ai, u_short port,struct sockaddr_in *pin);
+int SendDatagram(int desc,void *message,int tm, struct sockaddr_in *psos );
+int ReceiveDatagram(int desc, void *message,int tm, struct sockaddr_in *psor );
+int     generer_masque(int NbrBits );
 #endif 
