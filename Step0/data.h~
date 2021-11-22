@@ -1,0 +1,25 @@
+#ifdef DATAH
+
+#else
+
+
+#define DATAH
+
+struct Seance { 
+         int Reference ;
+	 char Film[60] ;
+	 int  Places ;
+         int  Salle ;
+         char Date[10] ;
+	} ;
+
+struct Facture
+       {
+         int NumeroFacturation ;
+         char NomClient[60] ;
+	 int DateFacturation ;
+	 int DateLivraison ;
+         int Quantite ;
+	 int Reference ;
+	} ;  	
+#endif

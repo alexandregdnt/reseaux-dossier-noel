@@ -1,0 +1,6 @@
+struct Record { 
+         int Reference ;
+	 char Memo[60] ;
+	 int  Achete ;
+         int  Restant ;
+	} ;

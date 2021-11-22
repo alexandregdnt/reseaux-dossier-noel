@@ -1,0 +1,16 @@
+
+# makefile admin
+
+LIBS=
+all:	admin	lib2018HV.o	 
+
+
+lib2018HV.o:	lib2018HV.c	lib2018HV.h	data.h	
+	echo "compilation de lib2018 HV"
+	gcc -c lib2018HV.c
+
+admin:	data.h	admin.c	lib2018HV.o		
+	echo "Compilation de admin"
+	gcc -o admin	admin.c  lib2018HV.o
+
+
