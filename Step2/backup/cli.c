@@ -67,6 +67,8 @@ int main(int argc, char *argv[]) {
         printf("1) Question                             \n");
         printf("2) Achat                                \n");
         printf("3) Livraison                            \n");
+        printf("4) OK                                   \n");
+        printf("5) Fail                                 \n");
         printf(">> ");
 
         fgets(Tampon, sizeof Tampon, stdin);
@@ -76,6 +78,8 @@ int main(int argc, char *argv[]) {
             case Question:
             case Achat:
             case Livraison:
+            case OK:
+            case Fail:
                 break;
 
             default:
@@ -85,26 +89,50 @@ int main(int argc, char *argv[]) {
 
     printf("----------------------  \n");
     do {
+        printf("Numero de la requete : ");
+        fgets(Tampon, sizeof Tampon, stdin);
+        UneRequete.Numero = atoi(Tampon);
+    } while (UneRequete.Numero <= 0);
+    do {
+        printf("Numero de facture : ");
+        fgets(Tampon, sizeof Tampon, stdin);
+        UneRequete.NumeroFacture = atoi(Tampon);
+    } while (UneRequete.NumeroFacture <= 0);
+    do {
+        printf("Date : ");
+        fgets(Tampon, sizeof Tampon, stdin);
+        UneRequete.Date = atoi(Tampon);
+    } while (UneRequete.Date <= 0);
+    do {
         printf("Reference : ");
         fgets(Tampon, sizeof Tampon, stdin);
         UneRequete.Reference = atoi(Tampon);
     } while (UneRequete.Reference <= 0);
+    do {
+        printf("Quantite : ");
+        fgets(Tampon, sizeof Tampon, stdin);
+        UneRequete.Quantite = atoi(Tampon);
+    } while (UneRequete.Quantite <= 0);
+    do {
+        printf("Prix : ");
+        fgets(Tampon, sizeof Tampon, stdin);
+        UneRequete.Prix = atoi(Tampon);
+    } while (UneRequete.Prix <= 0);
+
+    printf("Marque : ");
+    fgets(UneRequete.Marque, sizeof UneRequete.Marque, stdin);
+
+    printf("Modele : ");
+    fgets(UneRequete.Modele, sizeof UneRequete.Modele, stdin);
+
+    printf("Nom du client : ");
+    fgets(UneRequete.NomClient, sizeof UneRequete.NomClient, stdin);
     printf("----------------------  \n");
 
-    UneRequete.Numero = 0;
-    UneRequete.NumeroFacture = 0;
-    UneRequete.Date = 0;
-    UneRequete.Quantite = 0;
-    UneRequete.Prix = 0;
-    strcpy(UneRequete.Marque, "/");
-    strcpy(UneRequete.Modele, "/");
-    strcpy(UneRequete.Transmission, "/");
-    strcpy(UneRequete.NomClient, "/");
-
     printf("----------------------  \n");
-    // printf("Verification des donnees et confirmation de l'envoi \n");
-    // AfficheRequeteAG(stdout, UneRequete);
-    // printf("Les informations sont elles correcte ? \n");
+    printf("Verification des donnees et confirmation de l'envoi \n");
+    AfficheRequeteAG(stdout, UneRequete);
+    printf("Les informations sont elles correcte ? \n");
     printf("Souhaitez-vous envoyer cette requete ? (Y/N) \n");
     printf(">> ");
     char confirm = getchar();
@@ -116,7 +144,7 @@ int main(int argc, char *argv[]) {
         if (rc == -1)
             die("SendDatagram");
         else
-            printf("Envoi de %d bytes \n", rc);
+            fprintf(stderr, "Envoi de %d bytes\n", rc);
 
         memset(&UneRequete, 0, sizeof(struct RequeteAG));
         tm = sizeof(struct RequeteAG);
@@ -125,8 +153,7 @@ int main(int argc, char *argv[]) {
         if (rc == -1)
             die("ReceiveDatagram");
         else {
-            printf("bytes recus:%d \n", rc);
-            printf("Marque: %s - Modele: %s \n", UneRequete.Marque, UneRequete.Modele);
+            fprintf(stderr, "bytes recus:%d\n", rc);
             AfficheRequeteAG(stderr, UneRequete);
         }
     }

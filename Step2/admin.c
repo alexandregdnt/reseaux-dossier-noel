@@ -9,8 +9,8 @@
 #include <time.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "data.h"
-#include "LibSerAG.h"
+#include "Libraries/data.h"
+#include "Libraries/LibSerAG.h"
 
 // include pour les fonctions entrees sortie
 #include <stdio.h>
@@ -41,9 +41,7 @@ static struct termios old, new;
 int main() {
     char Choix;
     char Tampon[80];
-    int res;
     struct VehiculeAG UnRecord;
-    int Numero;
 
     int flog;
     flog = open(ADMIN_LOG_FILE, O_CREAT | O_RDWR, 0644);
@@ -62,13 +60,11 @@ int main() {
         printf(">> ");
         Choix = GetchE();
         printf("\n");
+
         switch (Choix) {
             case '1': {
-                struct VehiculeAG UnRecord;
-                FILE *sortie;
-                char Redo;
+                char Redo = 'y';
 
-                Redo = 'y';
                 while (Redo == 'Y' || Redo == 'y') {
                     int Nombre;
                     Nombre = NombreVehiculesAG("VehiculesAG");
@@ -79,7 +75,6 @@ int main() {
                     Redo = GetchE();
                     printf("\n");
                 }
-
                 break;
             }
             case '2':
@@ -112,6 +107,8 @@ int main() {
                 break;
             case '7':
                 exit(0);
+            default:
+                break;
         }
     }
 
@@ -187,8 +184,6 @@ void MonPrintf(char *tempo, int espace, int taille) {
 
 void CreationAjoutVehiculeAG(char *NomFichier, struct VehiculeAG *UnRecord) {
     FILE *sortie;
-    char Redo;
-    int nbr;
 
     sortie = fopen(NomFichier, "a"); /* Si le fichier existe, on le cree sinon on ajoute */
     if (sortie == NULL) {
@@ -199,7 +194,7 @@ void CreationAjoutVehiculeAG(char *NomFichier, struct VehiculeAG *UnRecord) {
 
 
     printf("Position actuelle dans le fichier %ld\n", ftell(sortie));
-    nbr = fwrite(UnRecord, sizeof(struct VehiculeAG), 1, sortie);
+    fwrite(UnRecord, sizeof(struct VehiculeAG), 1, sortie);
     fflush(sortie);
     fclose(sortie);
 }
@@ -289,8 +284,6 @@ void AfficheFacture(struct FactureAG *UneFacture) {
 void ListingVehiculesAG(char *NomFichier) {
     struct VehiculeAG UnRecord;
     FILE *sortie;
-    char Tampon[80];
-    int Numero;
     int nbr;
 
     sortie = fopen(NomFichier, "r"); /* Si le fichier existe, on le cree sinon on ajoute */
@@ -314,8 +307,6 @@ void ListingVehiculesAG(char *NomFichier) {
 void ListingFacturesAG(char *NomFichier) {
     struct FactureAG UneFacture;
     FILE *sortie;
-    char Tampon[80];
-    int Numero;
     int nbr;
 
     sortie = fopen(NomFichier, "r"); /* Si le fichier existe, on le cree sinon on ajoute */

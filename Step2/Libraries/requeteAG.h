@@ -16,7 +16,7 @@ struct RequeteAG {
     int Numero; // Contient le numéro de la requete
     int NumeroFacture;
     int Date;
-    int Reference; // la référence du film
+    int Reference; // la référence de la voiture
     int Quantite;;
     int Prix;
     char Marque[30];
@@ -27,7 +27,7 @@ struct RequeteAG {
 
 void AfficheRequeteAG (FILE *fp, struct RequeteAG R) {
     fprintf(fp,">TypeRequete %d \n", R.Type);
-    fprintf(fp," Reference %d \n", R.Numero);
+    fprintf(fp," Numero  %d \n", R.Numero);
     fprintf(fp," NumeroFacture %d \n", R.NumeroFacture);
     fprintf(fp," Date %d \n", R.Date);
     fprintf(fp," Reference %d \n", R.Reference);

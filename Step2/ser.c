@@ -7,7 +7,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "Libraries/udplib/udplib.h"
-#include "requeteAG.h"
+#include "Libraries/LibSerAG.h"
+#include "Libraries/requeteAG.h"
 
 #define SERVER_LOG_FILE "logServer.log"
 
@@ -24,6 +25,7 @@ int main(int argc, char *argv[]) {
     u_short PortSocket;
 
     int tm;
+    struct VehiculeAG UnRecordV;
     struct RequeteAG UneRequete;
 
     int flog;
@@ -49,14 +51,14 @@ int main(int argc, char *argv[]) {
     if (Desc == -1)
         die("CreateSockets:");
     else
-        fprintf(stderr, "CreateSockets %d\n", Desc);
+        printf("CreateSockets %d\n", Desc);
 
     tm = sizeof(struct RequeteAG);
     rc = ReceiveDatagram(Desc, &UneRequete, tm, &sor);
     if (rc == -1)
         die("ReceiveDatagram");
     else {
-        fprintf(stderr, "bytes recus:%d\n", rc);
+        printf("bytes recus:%d - Reference: %d\n", rc, UneRequete.Reference);
         AfficheRequeteAG(stderr, UneRequete);
     }
 
@@ -64,13 +66,32 @@ int main(int argc, char *argv[]) {
     /* attention l'enum peut être codé en short */
     /* reponse avec psos */
 
-    UneRequete.Type = OK;
+    if (RechercheAG("VehiculesAG", UneRequete.Reference, &UnRecordV) == 1) {
+        UneRequete.Type = OK;
+        UneRequete.Numero = 0;
+        UneRequete.NumeroFacture = 0;
+        UneRequete.Date = 0;
+        UneRequete.Quantite = 0;
+        UneRequete.Prix = 0;
+        strcpy(UneRequete.Marque, UnRecordV.Marque);
+        strcpy(UneRequete.Modele, UnRecordV.Modele);
+        strcpy(UneRequete.Transmission, UnRecordV.Transmission);
+        strcpy(UneRequete.NomClient, "/");
+    } else {
+        UneRequete.Type = Fail;
+        fprintf(stderr, "Rien a ete trouve \n");
+    }
+
     //strcat(UneRequete.Message, " Client");
     rc = SendDatagram(Desc, &UneRequete, sizeof(struct RequeteAG), &sor);
-    if (rc == -1)
+    if (rc == -1) {
+        fprintf(stdout, "response: 0 \n");
         die("SendDatagram:");
-    else
-        fprintf(stderr, "bytes envoyes:%d\n", rc);
+    } else {
+        printf("bytes envoyes:%d\n", rc);
+        fprintf(stdout, "response: 1 \n");
+        AfficheRequeteAG(stderr, UneRequete);
+    }
 
     close(flog);
     close(Desc);
